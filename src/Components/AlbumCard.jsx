@@ -19,13 +19,13 @@ function AlbumCard({ song }) {
   return (
     <Col className="text-center" onClick={handleClick}>
       <div className="position-relative album-card">
-        <Image className="img-fluid" src={song.album.cover_medium} alt="track" />
+        <Image className="img-fluid cursor-pointer" src={song.album.cover_medium} alt="track" />
         <i 
           className={`bi ${likedSongs[song.id] ? 'bi-heart-fill' : 'bi-heart'} position-absolute heart-icon`}
           onClick={handleLike}
         ></i>
       </div>
-      <p>
+      <p className="cursor-pointer">
         Track: "{song.title}"<br />
         Artist: {song.artist.name}
       </p>

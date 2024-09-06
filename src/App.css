@@ -477,3 +477,10 @@ body {
     opacity: 0.2;
   }
 }
+
+/* Aggiungi questo nuovo stile per il cursore a puntatore */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* ... altri stili ... */

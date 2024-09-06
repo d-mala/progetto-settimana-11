@@ -7,10 +7,9 @@ import { setSongs } from '../store/actions';
 function MainContent() {
   const dispatch = useDispatch();
   const songs = useSelector((state) => state.songs);
-  const searchResults = useSelector((state) => state.search.results); // Aggiornato
-  const searchQuery = useSelector((state) => state.search.query); // Aggiornato
+  const searchResults = useSelector((state) => state.searchResults);
+  const searchQuery = useSelector((state) => state.searchQuery);
   const [isLoading, setIsLoading] = useState(true);
-  const [isSearching, setIsSearching] = useState(false);
 
   const searchQueries = [
     { id: 'searchResults1', query: 'queen', title: 'Rock Classics' },
@@ -41,20 +40,6 @@ function MainContent() {
     };
     fetchAllSongs();
   }, []);
-
-  useEffect(() => {
-    if (searchQuery) {
-      setIsSearching(true);
-    } else {
-      setIsSearching(false);
-    }
-  }, [searchQuery]);
-
-  useEffect(() => {
-    if (searchResults && searchResults.length > 0) { // Aggiunto controllo
-      setIsSearching(false);
-    }
-  }, [searchResults]);
 
   const AlbumPlaceholder = () => (
     <Col className="text-center">
@@ -87,10 +72,7 @@ function MainContent() {
                 <Col xs={12}>
                   <h2 className="text-white">Search Results for "{searchQuery}"</h2>
                   <Row className="row-cols-1 row-cols-sm-2 row-cols-lg-4 imgLinks py-3">
-                    {isSearching
-                      ? Array(12).fill().map((_, index) => <AlbumPlaceholder key={index} />)
-                      : (searchResults || []).map(song => <AlbumCard key={song.id} song={song} />)
-                    }
+                    {searchResults.map(song => <AlbumCard key={song.id} song={song} />)}
                   </Row>
                 </Col>
               </Row>
