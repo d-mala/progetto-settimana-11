@@ -8,6 +8,7 @@ import Sidebar from './Components/Sidebar';
 import MainContent from './Components/MainContent';
 import Player from './Components/Player';
 import Library from './Components/Library';
+import Search from './Components/Search';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<MainContent />} />
                 <Route path="/library" element={<Library />} />
+                <Route path="/search" element={<Search />} />
               </Routes>
             </Col>
           </Row>

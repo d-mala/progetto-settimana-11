@@ -2,6 +2,7 @@ import { SEARCH_START, SEARCH_SUCCESS, SEARCH_ERROR } from '../actions';
 
 const initialState = {
   results: [],
+  allResults: {},  // Aggiungiamo questo per mantenere tutti i risultati di ricerca
   query: '',
   isLoading: false,
   error: null
@@ -17,7 +18,12 @@ export const searchReducer = (state = initialState, action) => {
       };
     case SEARCH_SUCCESS:
       return {
+        ...state,
         results: action.payload.songs,
+        allResults: {
+          ...state.allResults,
+          [action.payload.query]: action.payload.songs
+        },
         query: action.payload.query,
         isLoading: false,
         error: null

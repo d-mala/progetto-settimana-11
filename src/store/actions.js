@@ -1,4 +1,3 @@
-// Definizione delle costanti per i tipi di action
 export const SET_CURRENT_SONG = 'SET_CURRENT_SONG';
 export const TOGGLE_LIKE = 'TOGGLE_LIKE';
 export const SET_SONGS = 'SET_SONGS';
@@ -7,7 +6,6 @@ export const SEARCH_START = 'SEARCH_START';
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
 export const SEARCH_ERROR = 'SEARCH_ERROR';
 
-// Action creator
 export const setCurrentSong = (song) => ({
   type: SET_CURRENT_SONG,
   payload: song,

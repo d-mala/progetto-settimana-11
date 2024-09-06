@@ -7,7 +7,6 @@ import { setSongs } from '../store/actions';
 function MainContent() {
   const dispatch = useDispatch();
   const songs = useSelector((state) => state.songs);
-  const { results: searchResults, query: searchQuery, isLoading: isSearching } = useSelector((state) => state.search);
   const [isLoading, setIsLoading] = useState(true);
 
   const searchQueries = [
@@ -66,35 +65,21 @@ function MainContent() {
                 <a href="/">DISCOVER</a>
               </Col>
             </Row>
-            {searchQuery ? (
-              <Row>
+            {searchQueries.map(({ id, title }) => (
+              <Row key={id}>
                 <Col xs={12}>
-                  <h2 className="text-white">Search Results for "{searchQuery}"</h2>
-                  <Row className="row-cols-1 row-cols-sm-2 row-cols-lg-4 imgLinks py-3">
-                    {isSearching
-                      ? Array(12).fill().map((_, index) => <AlbumPlaceholder key={index} />)
-                      : searchResults.map(song => <AlbumCard key={song.id} song={song} />)
-                    }
-                  </Row>
+                  <div id={id}>
+                    <h2 className="text-white">{title}</h2>
+                    <Row className="row-cols-1 row-cols-sm-2 row-cols-lg-4 imgLinks py-3">
+                      {isLoading
+                        ? Array(4).fill().map((_, index) => <AlbumPlaceholder key={index} />)
+                        : songs[id] && songs[id].map(song => <AlbumCard key={song.id} song={song} />)
+                      }
+                    </Row>
+                  </div>
                 </Col>
               </Row>
-            ) : (
-              searchQueries.map(({ id, title }) => (
-                <Row key={id}>
-                  <Col xs={12}>
-                    <div id={id}>
-                      <h2 className="text-white">{title}</h2>
-                      <Row className="row-cols-1 row-cols-sm-2 row-cols-lg-4 imgLinks py-3">
-                        {isLoading
-                          ? Array(4).fill().map((_, index) => <AlbumPlaceholder key={index} />)
-                          : songs[id] && songs[id].map(song => <AlbumCard key={song.id} song={song} />)
-                        }
-                      </Row>
-                    </div>
-                  </Col>
-                </Row>
-              ))
-            )}
+            ))}
           </Col>
         </Row>
       </Container>

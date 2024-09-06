@@ -87,7 +87,6 @@ function Player() {
               </div>
             </Col>
             <Col xs={3} className="d-flex justify-content-end align-items-center">
-              {/* Qui puoi aggiungere altri controlli come volume, ecc. */}
             </Col>
           </>
         ) : (

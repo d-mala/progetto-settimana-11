@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Nav, Navbar, Form, FormControl, Button, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import logoImg from '../assets/logo/logo.png';
@@ -7,12 +8,14 @@ import { performSearch } from '../store/actions';
 
 function Sidebar() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       dispatch(performSearch(searchQuery));
+      navigate('/search');
     }
   };
 
