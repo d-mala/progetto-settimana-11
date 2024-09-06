@@ -1,38 +1,479 @@
-.App {
+/* Aggiungi questi stili all'inizio del file */
+html, body, #root, .app-container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.app-container {
+  padding-left: 230px;
+  height: 100vh;
+}
+
+/* Modifica questi stili esistenti */
+.navbar.fixed-left {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 230px;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  background-color: black;
+  z-index: 1200;
+}
+
+.mainPage {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: calc(100vh - 80px); /* Altezza totale meno l'altezza del player */
+  padding-bottom: 0; /* Rimuoviamo il padding-bottom */
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Modifica lo stile del player */
+.player-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 230px;
+  height: 80px;
+  background-color: #282828;
+  z-index: 1100;
+}
+
+.playerControls {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.play-pause-button {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
+
+.play-pause-button img {
+  width: 100%;
+  height: 100%;
+}
+
+.playerControls img:hover, 
+.playerControls i:hover,
+.play-pause-button:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 991px) {
+  .app-container {
+    padding-left: 0;
+  }
+
+  .navbar.fixed-left {
+    width: 100%;
+    height: auto;
+    position: static;
+  }
+
+  .player-container {
+    left: 0;
+  }
+
+  .mainPage {
+    margin-left: 0;
+    height: calc(100vh - 160px); /* Altezza totale meno l'altezza della navbar e del player */
+  }
+
+  .mainContent {
+    height: 100%; /* Usiamo il 100% dell'altezza del contenitore */
+    padding-bottom: 80px; /* Manteniamo il padding-bottom pari all'altezza del player */
+  }
+}
+
+/* Il resto del CSS rimane invariato */
+
+body {
+  color: white !important;
+  background: rgb(46, 63, 87);
+  background: linear-gradient(
+    90deg,
+    rgb(63, 86, 119) 0%,
+    rgba(33, 44, 61, 1) 42%,
+    rgb(15, 21, 29) 100%
+  );
+}
+
+/*SIDEBAR SECTION*/
+.navbar.fixed-left {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 230px;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  background-color: black;
+  z-index: 1200;
+}
+
+.navbar.fixed-left .navbar-collapse .navbar-nav a {
+  color: rgb(145, 145, 145) !important;
+  transition: 0.3s;
+}
+
+.navbar.fixed-left .navbar-collapse .navbar-nav a:hover {
+  color: white !important;
+}
+
+.navbar.fixed-left .navbar-brand {
+  padding-top: 20px;
+  padding-bottom: 30px;
+  padding-left: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 3px;
+}
+
+.nav-btn {
+  margin-bottom: 20px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.nav-btn a {
+  color: rgb(145, 145, 145);
+  text-decoration: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.nav-link i {
+  font-size: 1.5em;
+}
+
+.signup-btn {
+  background-color: white;
+  color: black;
+  border: 1px solid white;
+  border-radius: 20px;
+  width: 180px;
+  margin-bottom: 20px;
+}
+
+.signup-btn:hover {
+  color: white;
+  background-color: rgb(60, 211, 60);
+  border: 1px solid rgb(60, 211, 60);
+}
+
+.login-btn {
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  border-radius: 20px;
+  width: 180px;
+  margin-bottom: 20px;
+}
+
+.login-btn:hover {
+  color: black;
+  background-color: white;
+}
+
+@media screen and (max-width: 936px) {
+  #sidebar {
+    display: none;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* BOTTOM PLAYER SECTION*/
+
+.bg-container {
+  height: 5.5rem;
+  background-color: #282828;
+}
+
+.playerControls {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+}
+
+.playerControls .d-flex {
+  gap: 1rem;
+}
+
+.playerControls a {
   color: white;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.playerControls a:hover {
+  opacity: 1;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.playerControls img {
+  width: 14px;
+  height: 14px;
+}
+
+.playerControls img[alt="play"],
+.playerControls img[alt="pause"] {
+  width: 16px;
+  height: 16px;
+}
+
+.progress {
+  width: 100%;
+  background-color: #414141;
+  height: 4px;
+}
+
+.progress-bar {
+  background-color: #b3b3b3;
+}
+
+@media (max-width: 991px) {
+  .bg-container {
+    margin-left: 0;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+/*MAIN PAGE SECTION*/
+
+.mainLinks {
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
+.mainLinks a {
+  color: white;
+  font-weight: 700;
+  font-size: 12px;
+  opacity: 0.3;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.mainLinks a:hover {
+  text-decoration: none;
+  opacity: 1;
+  transition: 0.3s;
+}
+
+.imgLinks a p,
+.mainPage p {
+  padding-top: 8px;
+  font-size: 12px;
+  color: white;
+  font-weight: 700;
+}
+
+#rock,
+#pop,
+#hiphop {
+  color: white;
+  font-weight: 700;
+  padding-top: 50px;
+}
+
+#hipHopSection {
+  margin-bottom: 7rem;
+}
+
+.mainPage img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Aggiungi questi stili alla fine del file */
+
+.navbar.fixed-left {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 230px;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  background-color: black;
+  z-index: 1200;
+}
+
+.navbar.fixed-left .navbar-collapse .navbar-nav a {
+  color: rgb(145, 145, 145) !important;
+  transition: 0.3s;
+}
+
+.navbar.fixed-left .navbar-collapse .navbar-nav a:hover {
+  color: white !important;
+}
+
+.navbar.fixed-left .navbar-brand {
+  padding-top: 20px;
+  padding-bottom: 30px;
+  padding-left: 10px;
+}
+
+.navbar-nav .nav-item {
+  margin-bottom: 10px;
+}
+
+.navbar-nav .nav-link i {
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
+.mainPage {
+  margin-left: 230px;
+}
+
+@media screen and (max-width: 936px) {
+  #sidebar {
+    display: none;
+  }
+  .mainPage {
+    margin-left: 0;
+  }
+}
+
+.mainPage {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: calc(100vh - 80px);
+  padding-bottom: 0;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media screen and (min-width: 992px) {
+  .mainPage {
+    margin-left: 230px; /* Larghezza della sidebar */
+    width: calc(100% - 230px);
+  }
+}
+
+.playerControls img, .playerControls i {
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.playerControls img:hover, .playerControls i:hover {
+  opacity: 0.7;
+}
+
+/* Aggiungi questo nuovo stile per il pulsante dei preferiti */
+.favorite-button {
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.favorite-button:hover {
+  color: #1db954; /* Colore verde di Spotify */
+}
+
+/* Aggiungi questi stili per il contenuto principale */
+.mainContent {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%; /* Usiamo il 100% dell'altezza del contenitore */
+  padding-bottom: 80px; /* Aggiungiamo un padding-bottom pari all'altezza del player */
+  width: 100%;
+}
+
+.mainContent .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+@media screen and (max-width: 991px) {
+  .mainContent {
+    margin-left: 0;
+    height: 100%; /* Usiamo il 100% dell'altezza del contenitore */
+    padding-bottom: 80px; /* Manteniamo il padding-bottom pari all'altezza del player */
+  }
+}
+
+/* Modifica lo stile dell'icona del cuore */
+.bi-heart, .bi-heart-fill {
+  color: white !important;
+  transition: color 0.3s ease !important;
+}
+
+.bi-heart:hover, .bi-heart-fill:hover,
+.bi-heart-fill {
+  color: #1db954 !important; /* Colore verde di Spotify */
+}
+
+/* Assicurati che tutte le scritte siano bianche */
+.mainContent h2,
+.mainContent p,
+.mainContent a {
+  color: white !important;
+}
+
+/* Stile generale per il corpo */
+body {
+  color: white !important;
+  background: rgb(46, 63, 87);
+  background: linear-gradient(
+    90deg,
+    rgb(63, 86, 119) 0%,
+    rgba(33, 44, 61, 1) 42%,
+    rgb(15, 21, 29) 100%
+  );
+}
+
+/* Aggiungi questi stili per il contenuto principale */
+
+.album-card {
+  overflow: hidden;
+}
+
+.album-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.heart-icon {
+  bottom: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  text-shadow: 0 0 3px rgba(0,0,0,0.5);
+  transition: color 0.3s ease;
+}
+
+.heart-icon:hover {
+  color: #1db954 !important; /* Colore verde di Spotify */
+}
+
+.placeholder-glow .placeholder {
+  animation: placeholder-glow 2s ease-in-out infinite;
+}
+
+@keyframes placeholder-glow {
+  50% {
+    opacity: 0.2;
   }
 }
