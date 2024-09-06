@@ -7,8 +7,7 @@ import { setSongs } from '../store/actions';
 function MainContent() {
   const dispatch = useDispatch();
   const songs = useSelector((state) => state.songs);
-  const searchResults = useSelector((state) => state.searchResults);
-  const searchQuery = useSelector((state) => state.searchQuery);
+  const { results: searchResults, query: searchQuery, isLoading: isSearching } = useSelector((state) => state.search);
   const [isLoading, setIsLoading] = useState(true);
 
   const searchQueries = [
@@ -72,7 +71,10 @@ function MainContent() {
                 <Col xs={12}>
                   <h2 className="text-white">Search Results for "{searchQuery}"</h2>
                   <Row className="row-cols-1 row-cols-sm-2 row-cols-lg-4 imgLinks py-3">
-                    {searchResults.map(song => <AlbumCard key={song.id} song={song} />)}
+                    {isSearching
+                      ? Array(12).fill().map((_, index) => <AlbumPlaceholder key={index} />)
+                      : searchResults.map(song => <AlbumCard key={song.id} song={song} />)
+                    }
                   </Row>
                 </Col>
               </Row>
