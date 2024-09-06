@@ -7,8 +7,8 @@ import { setSongs } from '../store/actions';
 function MainContent() {
   const dispatch = useDispatch();
   const songs = useSelector((state) => state.songs);
-  const searchResults = useSelector((state) => state.searchResults);
-  const searchQuery = useSelector((state) => state.searchQuery);
+  const searchResults = useSelector((state) => state.search.results); // Aggiornato
+  const searchQuery = useSelector((state) => state.search.query); // Aggiornato
   const [isLoading, setIsLoading] = useState(true);
   const [isSearching, setIsSearching] = useState(false);
 
@@ -51,7 +51,7 @@ function MainContent() {
   }, [searchQuery]);
 
   useEffect(() => {
-    if (searchResults.length > 0) {
+    if (searchResults && searchResults.length > 0) { // Aggiunto controllo
       setIsSearching(false);
     }
   }, [searchResults]);
@@ -89,7 +89,7 @@ function MainContent() {
                   <Row className="row-cols-1 row-cols-sm-2 row-cols-lg-4 imgLinks py-3">
                     {isSearching
                       ? Array(12).fill().map((_, index) => <AlbumPlaceholder key={index} />)
-                      : searchResults.map(song => <AlbumCard key={song.id} song={song} />)
+                      : (searchResults || []).map(song => <AlbumCard key={song.id} song={song} />)
                     }
                   </Row>
                 </Col>
